@@ -1,0 +1,6 @@
+{
+    "require": {
+        "team-reflex/discord-php": "^7.3",
+        "restcord/restcord": "^0.5.0"
+    }
+}
