@@ -44,18 +44,10 @@ $discord->on('ready', function (Discord $discord) {
     $activity->url = "https://twitch.tv/oRyanPereiraS";
     $discord->updatePresence($activity, false, "online", false);
 
-
-    //$commands = new CommandCommand($discord, ['name' => 'ping', 'description' => 'Envia Pong!']);
-    //$discord->application->commands->save($commands);
-
-
-
-
-    // Listen for messages.
     $discord->on(Event::MESSAGE_CREATE, function (Message $message, Discord $discord) {
         if ($message->author->bot) return;
         $args = explode(" ", $message->content);
-        if ($args[0] != "<@1175206730628595813>") return;
+        if ($args[0] != "<@{$discord->user->id}>") return;
 
         if (isset($args[1])) {
             $command = strtolower($args[1]);
@@ -70,7 +62,6 @@ $discord->on('ready', function (Discord $discord) {
         }
         echo "{$message->author->username}: {$message->content}", PHP_EOL;
 
-        // Note: MESSAGE_CONTENT intent must be enabled to get the content if the bot is not mentioned/DMed.
     });
 
 });
