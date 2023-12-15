@@ -45,6 +45,7 @@ $discord->on('ready', function (Discord $discord) {
     $discord->updatePresence($activity, false, "online", false);
 
     $discord->on(Event::MESSAGE_CREATE, function (Message $message, Discord $discord) {
+        global $gptChat;
         if ($message->author->bot) return;
         $args = explode(" ", $message->content);
         if ($args[0] != "<@{$discord->user->id}>") return;
@@ -66,6 +67,7 @@ $discord->on('ready', function (Discord $discord) {
             }
         } else {
             $message->reply("Salve tortoguito <:feliz:1158168017625161728>");
+            
         }
         //echo "{$message->author->username}: {$message->content}", PHP_EOL;
     });
@@ -95,11 +97,11 @@ $discord->on('ready', function (Discord $discord) {
                     //echo "Captado, {$percentagem}% de similaridade".PHP_EOL;
                 }
             }
-            
         } else {
             //echo "Espere um pouco antes de realizar outra verificação.".PHP_EOL;
         }
     });
+    
 });
 
 $discord->run();

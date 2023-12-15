@@ -28,7 +28,11 @@ $thread = $interaction->channel->startThread("Entrevista-{$atributes['membro']['
             "inline" => true
 
         ]);
-        $message = $response->sendMessage(MessageBuilder::new()->setContent("<@{$interaction->user->id}> <@{$atributes['membro']['value']}>")->addEmbed($embed));
+        $message = $response->sendMessage(MessageBuilder::new()->setContent("<@{$interaction->user->id}> <@{$atributes['membro']['value']}>"))->then(function($message){
+            $message->channel->deleteMessages([$message->id]);
+        });
+        
+        $response->sendEmbed($embed);
         $interaction->respondWithMessage(MessageBuilder::new()->setContent("Thread criada com sucesso! ID da thread: <#{$response['id']}>"));
         $response->setPermissions("1135282423937110056", [
             ChannelPermission::ALL_PERMISSIONS,
