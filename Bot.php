@@ -37,12 +37,8 @@ $discord->on('ready', function (Discord $discord) {
 
     include "commands/RegisterSlashCommands.php";
     include "commands/listener/CommandListener.php";
-
-    $activity = $discord->factory(\Discord\Parts\User\Activity::class);
-    $activity->type = \Discord\Parts\User\Activity::TYPE_STREAMING;
-    $activity->name = "Codando em PHP";
-    $activity->url = "https://twitch.tv/oRyanPereiraS";
-    $discord->updatePresence($activity, false, "online", false);
+    include "events/presence.php";
+    
 
     $discord->on(Event::MESSAGE_CREATE, function (Message $message, Discord $discord) {
         global $gptChat;
