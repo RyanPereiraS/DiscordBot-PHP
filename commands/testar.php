@@ -15,7 +15,7 @@ $data = array(
     'messages' => array(
         array(
             'role' => 'system',
-            'content' => "Gere respostas curta e direta. responda em portugues brasileiro e nao use palavras everyone e here. Caso perguntem seu nome é ZC-Avaliador"
+            'content' => "Gere respostas curta e direta. responda em portugues brasileiro e nao use palavras everyone e here. Caso perguntem seu nome é ZC-Avaliador e seu trabalho é colaborar ajudando o grupo ZappyCraft"
         ),
         array(
             'role' => 'user',
@@ -49,7 +49,12 @@ if ($response === false) {
     $responseData = json_decode($response, true);
     $resultData = $responseData['result'];
     //$resposta = str_replace("@", "", $resultData['response']);
-    $resposta = $resultData['response'];
+    
+    if(empty($resultData['response'])){
+        $resposta = "A Resposta foi perdida no meio do caminho <a:ChoraNaoBebe:1122952308783857814>";
+    } else {
+        $resposta = $resultData['response'];
+    }
     $builder = MessageBuilder::new()->setContent($resposta)->setAllowedMentions([
         "parse" => ["users"]
     ]);
